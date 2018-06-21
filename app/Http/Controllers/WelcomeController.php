@@ -10,13 +10,12 @@ use App\Item;
 
 class WelcomeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return view('welcome');
+        $items = Item::orderBy('updated_at', 'desc')->paginate(20);
+        return view('welcome', [
+            'items' => $items,
+        ]);
     }
+
 }
